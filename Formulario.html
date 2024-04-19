@@ -1,25 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+var editable = true;
+
+
+$(document).ready(function(){
+  $("#btnG").click(function(){
+        $("#tbori").append('<tr class="editable"><th><input class="input" type="text" value="'+$("#gustos").val()+'" disabled></th><th><input class="input" type="number" value="0" disabled></th><th><input class="input" style="color: blue;" type="button" value="Editar" disabled></th></tr>');
+        $("#tbori").find("tr").addClass("editable")
+        editable = false;
+    });
+
+
+  $("tr.editable").click(function(){
+    $(this).find("input").prop("disabled", false);
+    $("div").show();
+  });
+
+
+  $("#enviar").click(function(){
+    alert("envi");
+    window.location.href = "/resivido2.html?nombre="+$("#nombre").val()+"&email="+$("#mail").value()+"&telefono="+$("#tel").val()+"&gusto="+$("#gustos").val();
+  });
+
+  $("#reset").click(function(){
+    alert("res");
+    $("input").val() = null;
+  });
+
+});
+
+    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
 </head>
 <body>
     <div style="display: flex; align-items: center; justify-content: center; height: 100vh;">
-        <p style="font-size: larger;">
-            <b>Web</b>Developer<br>
-        </p>
-        <p>Estoy morido</p>
-        <p>Quiero furros</p>
-        <p>me lleva la verdura</p>
-
-        <p>
+        <div>
+            <p style="font-size: larger; text-align: center;">
+                <b>Web</b>Developer
+            </p>
             <div class="box">
-                aqui va el f
+                <div class="control has-icons-left has-icons-right">
+                    <input id="nombre" class="input" type="text" placeholder="Nombre completo">
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+
+                <br>
+                
+                <div class="control has-icons-left has-icons-right">
+                    <input id="mail" class="input" type="email" placeholder="Email">
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+
+                <br>
+
+                <div class="control has-icons-left has-icons-right">
+                    <input id="tel" class="input" type="tel" placeholder="telefono">
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-phone"></i>
+                    </span>
+                </div>
+
+                <br>
+
+                <div class="control has-icons-left has-icons-right" style="display: flex;">
+                    <input id="gustos" class="input" type="text" placeholder="gustos">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-heart"></i>
+                    </span>
+                    <button id="btnG" class="button">Gustos</button>
+                </div>
+
+                <div class="control has-icons-left has-icons-right">
+                    <div class="block"><i class="fas fa-flag"></i></div>
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Gustos</th>
+                                    <th><i class="fas fa-percentage"></i></th>
+                                    <th>edit</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbori">
+                                <tr class="editable">
+                                    <th><input class="input" type="text" value=" " disabled></th>
+                                    <th><input class="input" type="number" value="0" disabled></th>
+                                    <th><input class="input" style="color: blue;" type="button" value="Editar" disabled></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div hidden>
+                        <p>Pulse aceptar para guardar los cambios o cancelar para anularlos</p>
+                        <button type="submit" class="button is-success" id="enviar">Aceptar</button>
+                        <button type="reset" class="button is-danger" id="reset">Cancelar</button>
+                    </div>
+                </div>
+            
             </div>
-        </p>
+        </div>
     </div>
 
 </body>
